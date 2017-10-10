@@ -1,9 +1,20 @@
+// Copyright 2017 GeunYoung Lim <interruping4dev@gmail.com>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 /*!
  @header SCLiveMapSSLSocketServerConnector.h
- @brief SCLiveMapSSLSocketServerConnector 클래스 헤더파일
- @author Geun Young Lim
- @copyright  2017 Geun Young Lim
- @version    16. 01. 11
+ @author GeunYoung Lim, interruping@naver.com
+ @version    17. 09. 11
  */
 
 #import <Foundation/Foundation.h>
@@ -12,8 +23,7 @@
 @interface SCLiveMapSSLSocketServerConnector : NSObject <SCLiveMapServerCommunicatorImplementor, SCLiveMapServerCommunicatorDelegate>
 
 /*
- @breif 초기화 매서드
- @return instancetype 인스턴스 객체 
+ 초기화 매서드
 */
 - (instancetype)init;
 //SCLiveMapServerCommunicatorImplementor 프로토콜 메서드들.

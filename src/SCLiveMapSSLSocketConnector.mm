@@ -1,12 +1,23 @@
+// Copyright 2017 GeunYoung Lim <interruping4dev@gmail.com>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 /*!
  @file SCLiveMapSSLSocketServerConnector.m
- @brief SCLiveMapSSLSocketServerConnector 클래스 구현
- @author Geun Young Lim
- @version    16. 01. 11
+ @author GeunYoung Lim, interruping@naver.com
+ @date    17. 09. 11.
  */
 #import "SCLiveMapSSLSocketConnector.h"
 #include <memory>
-//버퍼 크기 상수
 
 @interface SCLiveMapSSLSocketServerConnector () <NSStreamDelegate> {
      //  프로퍼티 수동 선언
@@ -21,9 +32,8 @@
     BOOL _ioWrite;
     BOOL _ioRead;
 }
-/*!
+/*
   연결요청시간이 만료됬을 시 호출되는 매서드
- @param timer 타이머
  */
 - (void) timeout: (NSTimer *) timer;
  //  타이머 프로퍼티
@@ -31,27 +41,19 @@
 
 /*
   일정한 간격을 두고 스트림에 읽고 쓰는 작업을 시행하는 타이머 매서드
- @param timer 타이머
  */
-
 - (void) timeToIO: (NSTimer *) timer;
  //  스트림 IO 타이머
 @property (nonatomic, strong) NSTimer *ioTimer;
 
-//  타이머 정리 매서드
-
-
+//  타이머 정리 매서드.
 - (void)clearAllTimer;
 
- //  NSStreamDelegate 매서드
+//  NSStreamDelegate 매서드
 -  (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode;
- //
-/*!
- @breifTCP 소켓을 생성하여 NSStream 객체에 설정한다 (비공개 매서드 )
- @param inputStream 입력 스트림
- @param outputStream 출력 스트림
- @param host 호스트 이름
- @param port 포트
+
+/*
+ TCP 소켓을 생성하여 NSStream 객체에 설정한다 (비공개 매서드 )
  */
 - (void) attachCFSocketToInputStream: (NSInputStream **) inputStream
                         OutputStream: (NSOutputStream **) outputStream
@@ -201,8 +203,7 @@
 }
  //  구현
 -(BOOL)open {
-    
-    //setenv("CFNETWORK_DIAGNOSTICS","3",1);
+
     NSInputStream *inputStream = nil;
     NSOutputStream *outputStream = nil;
     
@@ -326,7 +327,6 @@
         {
 
             if ( self.outputStream.hasSpaceAvailable ){
-                NSLog(@"write stream");
                 
                 [self performSelectorOnMainThread:@selector(updateData) withObject:nil waitUntilDone:YES];
                 
@@ -356,7 +356,6 @@
             
             
             if ( self.inputStream.hasBytesAvailable ){
-                NSLog(@"read stream");
                 char headerData[4];
                 
                 [self.inputStream read:(uint8_t*)headerData maxLength:4];
@@ -380,8 +379,8 @@
             break;
         }
         case NSStreamEventErrorOccurred: {
-            [self serverCommunitactionError:aStream.streamError]; //델리게이트로 에러 전달 후
-            [aStream close]; //스트림 닫기.
+            [self serverCommunitactionError:aStream.streamError];
+            [aStream close];
             [self clearAllTimer];
             break;
         }

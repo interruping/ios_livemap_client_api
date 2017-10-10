@@ -11,14 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-//
-//  service_type.hpp
-//  livemap_server
-//
-//  Created by Geon young Lim on 2017. 9. 26..
-//
-
+/*!
+ @file service_type.hpp
+ @author GeunYoung Lim, interruping@naver.com
+ @date 2017. 9. 26.
+*/
 #ifndef service_type_h
 #define service_type_h
 

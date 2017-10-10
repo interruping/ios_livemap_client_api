@@ -1,9 +1,22 @@
+// Copyright 2017 GeunYoung Lim <interruping4dev@gmail.com>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /*!
- @header SCLiveMapServerCommunicator.h
+ @file SCLiveMapServerCommunicator.h
  @brief SCLiveMapServerCommunicator 클래스 헤더파일
- @author Geun Young Lim
- @copyright  2017 Geun Young Lim
- @version    16. 01. 09
+ @author GeunYoung Lim, interruping@naver.com
+ @version 2017. 09. 19
  */
 #import <Foundation/Foundation.h>
 
@@ -13,8 +26,7 @@ typedef NS_ENUM( NSInteger, SCLiveMapServerType ) {
 };
 
 /*!
- @protocol 라이브맵 서버와 통신시 발생하는 이벤트 델리게이트
- @breif 
+ @breif 라이브맵 서버와 통신시 발생하는 이벤트 델리게이트
 */
 @protocol SCLiveMapServerCommunicatorDelegate <NSObject>
 @required @property (nonatomic, weak) id <SCLiveMapServerCommunicatorDelegate> delegate;
@@ -50,8 +62,8 @@ typedef NS_ENUM( NSInteger, SCLiveMapServerType ) {
 
 
 /*!
- @protocol 구현부 인터페이스 프로토콜
- @breif pimple 관용구를 사용, 상세 클래스 구현부 클래스들의 인터페이스 역할.
+ @breif 구현부 인터페이스 프로토콜
+ @details pimpl 관용구를 사용, 상세 클래스 구현부 클래스들의 인터페이스 역할.
 */
 @protocol SCLiveMapServerCommunicatorImplementor <NSObject>
 @optional
@@ -74,10 +86,8 @@ typedef NS_ENUM( NSInteger, SCLiveMapServerType ) {
 @end
 
 /*!
- @class SCLiveMapServerCommunicator 클래스
- @brief 라이브맵 서버에 접속하는 매커니즘을 구현한 클래스.
- 
-
+ @breif SCLiveMapServerCommunicator 클래스
+ @details 라이브맵 서버에 접속하는 매커니즘을 구현한 클래스.
 */
 @interface SCLiveMapServerCommunicator : NSObject <SCLiveMapServerCommunicatorImplementor, SCLiveMapServerCommunicatorDelegate>
 - (instancetype)initWithServerType: (SCLiveMapServerType) serverType;

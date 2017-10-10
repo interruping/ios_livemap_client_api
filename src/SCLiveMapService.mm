@@ -1,16 +1,28 @@
+// Copyright 2017 GeunYoung Lim <interruping4dev@gmail.com>
 //
-//  SCLiveMapService.m
-//  LiveMapClient
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//  Created by Geon young Lim on 2017. 10. 1..
-//  Copyright © 2017년 interruping. All rights reserved.
+// http://www.apache.org/licenses/LICENSE-2.0
 //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/*!
+ @file SCLiveMapService.m
+ @author GeunYoung Lim, interruping@naver.com
+ @date 2017. 10. 1.
+ */
+
 
 #import <Foundation/Foundation.h>
 #import "SCLiveMapService.h"
 #import "service_command.hpp"
 #import "SCLiveMapServerCommunicator.h"
-
 
 #import <memory>
 #import <queue>
@@ -74,11 +86,10 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
     
     return self;
 }
+
 -(void)asyncStart
 {
-    self.serverCommunicator.host = @"livemap-server-certification.net";
-    //self.serverCommunicator.host = @"192.168.0.8";
-
+    self.serverCommunicator.host = @"LIVEMAP_SERVER_URL_INPUT_HERE";
     self.serverCommunicator.port = 1212;
     
 
@@ -87,12 +98,11 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
     _commandQueue.push(transCmdToPair(requestUserInfo));
     [self.serverCommunicator open];
 }
+
 -(void)stop
 {
     [self.serverCommunicator close];
 }
-
-
 
 -(void)updateUserNode: (SCLiveMapClientNode *)recentUpdateNode
 {
@@ -100,6 +110,7 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
     std::shared_ptr<user_update_node> command = std::make_shared<user_update_node>(recentUpdateNode);
     _commandQueue.push(transCmdToPair(command));
 }
+
 -(void)updateUserNode: (SCLiveMapClientNode *)recentUpdateNode AndViewPointlat: (double) latitutude lon: (double) longitude
 {
     using namespace solarcode::livemap;
@@ -127,7 +138,7 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
         
         return 0;
     }
-    //NSLog(@"command queue size : %i", _commandQueue.size());
+
     std::pair<int,std::shared_ptr<command_form_base>> typeAndCmd =  _commandQueue.front();
     _commandQueue.pop();
     

@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/*!
+ @file service_type.hpp
+ @author GeunYoung Lim, interruping@naver.com
+ @date 2017. 9. 26.
+ */
 #include "service_type.hpp"
 #include "command_form.hpp"
 #import "SCLiveMapClientNode.h"
@@ -24,7 +29,6 @@ namespace livemap {
     @brief 노드 업데이트 명령 클래
     @detail n/a.
     @namespace solarcode::livemap::update_node;
-    
      */
     template <int TYPE_ID>
     class update_node_base : public command_form_base_t<TYPE_ID> {
@@ -32,7 +36,8 @@ namespace livemap {
     	/*
     	@breif 생성자
     	@param update_info_node 업데이트할 노드 정보를 담은 노드 객체
-    	 */    	update_node_base(SCLiveMapClientNode* update_info):
+    	 */
+        update_node_base(SCLiveMapClientNode* update_info):
     	command_form_base_t<TYPE_ID>(),
         _id_seg_info(0,4),
         _lat_seg_info(4,8),
