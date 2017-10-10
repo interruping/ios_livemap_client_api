@@ -89,3 +89,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#Doxygen generate doc
+./doc/html
+./doc/latex

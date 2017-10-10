@@ -34,7 +34,7 @@ namespace livemap {
     class update_node_base : public command_form_base_t<TYPE_ID> {
     public:
     	/*
-    	@breif 생성자
+    	@brief 생성자
     	@param update_info_node 업데이트할 노드 정보를 담은 노드 객체
     	 */
         update_node_base(SCLiveMapClientNode* update_info):
