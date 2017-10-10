@@ -61,6 +61,16 @@ ios_livemap_client_api의 부모 프로젝트에서 submodule update git 명령�
 
     $ git pull origin Release
 
+iOS LiveMapClient API 문서 보기
+=======
 
+iOS LiveMapClient API의 문서는 Doxygen으로 자동 생성하도록 작성하였습니다.
+프로젝트의 루트 디렉토리에서 doxygen 명령을 실행하여 doc/폴더에 html 과 latex
+포멧으로 API문서를 볼 수 있습니다.
 
+    $ doxygen
+
+라이센스
+=======
+이 프로젝트는 Apache License 2.0 라이센스를 따릅니다. 자세한 사항은 [LICENSE.txt](https://github.com/interruping/ios_livemap_client_api.git/LICENSE)파일을 참조하세요.
 
