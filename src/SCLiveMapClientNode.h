@@ -22,13 +22,29 @@
 #define SCLiveMapClientNode_h
 #import <Foundation/Foundation.h>
 
+/*!
+ @brief GPS 위치 구조체
+ @details 위도 경도를 갖는 구조체.
+ */
 typedef struct coord {
     double latitude;
     double longitude;
 } Coordinate;
 
+/*!
+ @brief LiveMap 클라이언트 노드 클래스
+ @details 클라이언트 노드 클래스, LiveMapServer에 존재하는 클라이언트 정보를 담는 클래스
+ */
 @interface SCLiveMapClientNode : NSObject
+/*!
+ @brief id 프로퍼티
+ @details LiveMapServer에서 유일한 클라이언트 id 값.
+ */
 @property (nonatomic, assign) NSInteger id;
+/*!
+ @brief 좌표 프로퍼티
+ @details 클라이언트의 현재 GPS 위치 위도, 경도.
+ */
 @property (nonatomic, assign) Coordinate coordinate;
 @end
 
