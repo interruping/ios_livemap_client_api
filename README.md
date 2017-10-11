@@ -61,6 +61,48 @@ ios_livemap_client_api의 부모 프로젝트에서 submodule update git 명령�
 
     $ git pull origin Release
 
+iOS LiveMapClient API 예제
+=======
+
+SCLiveMapSerivce 객체 생성 및 LiveMapServer와 통신 시작.
+
+    #include "SCLiveMapService.h"
+
+    @interface XXX... <SCLiveMapServiceDelegate>
+    //SCLiveMapService 객체 프로퍼티 선언
+    @property (nonatomic, strong) SCLiveMapService* lmService;
+    @end
+
+    @implementaion XXX...
+    
+    @synthesize lmService = _lmService;
+    
+    - (void) someFunc
+    {
+        //SCLiveMapService 객체 생성 & SCLiveMapServiceDelegate 객체 설정.
+        self.lmService = [[SCLiveMapService alloc]init];
+        self.lmService.delegate = self;
+        //SCLiveMapService 서비스 비동기 시작.
+        [self asyncStart];
+    }
+    
+    // [self asyncStart]; 호출 이후, LiveMapServer와 연결이 되고 LiveMapServer로부터 id를 부여받으면 호출됨.
+    -(void) onServiceReady: (SCLiveMapService*) livemapService createdNode: (SCLiveMapClientNode *) livemapClientNode
+    {
+        //서버로부터 발급받은 id 값 읽기.
+        NSInteger idFromeLiveMapServer = livemapClientNode.id;
+        
+        ....
+        // 좌표 값 서버로 업데이트
+        [self updateUserNode:livemapClientNode];
+        
+        // 다른 클라이언트에게 메시지 전송
+        [self.lmService sendMessageSender:livemapClientNode.id Recver:[다른 클라이언트 id] Msg:@"Hello there."];
+    
+    }
+    
+    @end
+
 iOS LiveMapClient API 문서 보기
 =======
 
