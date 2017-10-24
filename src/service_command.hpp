@@ -282,7 +282,7 @@ namespace livemap {
         {
             add_segment(&send_node_id, 4);
             add_segment(&recv_node, 4);
-            int msg_length = (int)[msg length];
+            int msg_length = (int)([msg dataUsingEncoding:NSUTF8StringEncoding].length);
             add_segment(&msg_length, 4);
             
             const char *tmp = [msg UTF8String];
