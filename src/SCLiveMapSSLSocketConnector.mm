@@ -229,14 +229,11 @@
         [self.inputStream open];
         [self.outputStream open];
         
-        
-        
         isStreamBusy = NO;
         [streamCondition signal];
         [streamCondition unlock];
         
         //end of your code
-        
         [[NSRunLoop currentRunLoop] run]; // start a run loop, look at the next point
     });
 

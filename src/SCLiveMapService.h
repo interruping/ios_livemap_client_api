@@ -130,6 +130,11 @@
  */
 @property (nonatomic, strong) id<SCLiveMapServiceDelegate> delegate;
 
+/*!
+ @brief Host 프로퍼티
+ @details LiveMapServer의 도메인 or IPv4 주소.
+ */
+@property (nonatomic, strong) NSString *host;
 @end
 
 #endif /* SCLiveMapService_h */

@@ -72,7 +72,7 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
 
 @synthesize delegate = _delegate;
 @synthesize serverCommunicator = _serverCommunicator;
-
+@synthesize host = _host;
 -(instancetype)init
 {
     self = [super init];
@@ -81,6 +81,7 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
         _delegate = nil;
         _serverCommunicator = [[SCLiveMapServerCommunicator alloc]initWithServerType: SSLSocketServer];
         _serverCommunicator.delegate = self;
+        _host = nil;
         
     }
     
@@ -89,7 +90,11 @@ transCmdToPair(std::shared_ptr<CMDTYPE> cmd) {
 
 -(void)asyncStart
 {
-    self.serverCommunicator.host = @"LIVEMAP_SERVER_URL_INPUT_HERE";
+    if ( self.host == nil ){
+        self.serverCommunicator.host = @"localhost";
+    } else {
+        self.serverCommunicator.host = self.host;
+    }
     self.serverCommunicator.port = 1212;
     
 
