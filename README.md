@@ -82,6 +82,7 @@ SCLiveMapSerivce 객체 생성 및 LiveMapServer와 통신 시작.
         //SCLiveMapService 객체 생성 & SCLiveMapServiceDelegate 객체 설정.
         self.lmService = [[SCLiveMapService alloc]init];
         self.lmService.delegate = self;
+        self.lmService.host = @"라이브맵서버의 주소를 여기에 적으세요.";
         //SCLiveMapService 서비스 비동기 시작.
         [self asyncStart];
     }
@@ -93,14 +94,39 @@ SCLiveMapSerivce 객체 생성 및 LiveMapServer와 통신 시작.
         NSInteger idFromeLiveMapServer = livemapClientNode.id;
         
         ....
-        // 좌표 값 서버로 업데이트
+        // 사용자의 좌표 값 서버로 업데이트
         [self updateUserNode:livemapClientNode];
+        // 사용자의 좌표 값과 다른 노드들이 존재하는지 알고 싶은 좌표 업데이트
+        [self updateUserNode:livemapClientNode AndViewPointlat:알고싶은 위도 lon:알고싶은 경도]
         
         // 다른 클라이언트에게 메시지 전송
         [self.lmService sendMessageSender:livemapClientNode.id Recver:[다른 클라이언트 id] Msg:@"Hello there."];
     
     }
     
+     //라이브맵 서버로부터 연결에 실패했을 경우 호출됨.
+    -(void) connectionFailToLiveMapServer: (SCLiveMapService * )livemapService error: (NSError *) error
+    {
+        ...
+    }
+
+    //라이브맵 서버로부터 연결이 끊어졌을 경우 호출됨.
+    -(void) connectionLostFromLiveMapServer: (SCLiveMapService *) livemapService error: (NSError *)
+    {
+    
+    }
+
+    //자신의 위치로 또는 알고싶은 좌표로부터 가까이 있는 다른 사용자 노드들의 정보를 서버로부터 받았을 때 호출됨.
+    -(void) nearNodesFromLiveMapServer: (SCLiveMapService*) livemapService nearNodes: (NSArray<SCLiveMapClientNode*> *) nearNodes
+    {
+        ...
+    }
+
+    //다른 사용자로부터 메시지를 받았을 때 호출됨.
+    -(void) receivedMessageSender: (NSInteger) senderId Msg: (NSString *) message
+    {
+        ...
+    }
     @end
 
 iOS LiveMapClient API 문서 보기
